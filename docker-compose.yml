@@ -1,0 +1,26 @@
+version: 3.2.47
+
+services:
+  backend:
+    container_name: Python-server-grpc
+    build:
+      context: server
+      dockerfile: Dockerfile
+    volumes:
+      - ./server:/server
+    command: >
+      sh -c 
+      "python server.py"
+    ports:
+      - "50051:50051"
+
+  nginx:
+    container_name: Nginx-grpc
+    image: nginx:latest
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/logs:/etc/nginx/logs
+    ports:
+      - "80:80"
+    depends_on:
+      - backend

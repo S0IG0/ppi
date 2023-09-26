@@ -1,0 +1,5 @@
+venv
+client/node_modules
+.idea
+server/__pycache__/
+server/proto/__pycache__/
